@@ -1,36 +1,58 @@
+import { json } from '@remix-run/node';
+import {useLoaderData} from "@remix-run/react";
+
 export const meta = () => {
   return [{ title: "New Remix App" }];
 };
 
+export const loader = async () => {
+
+  const standings = await fetch('https://statsapi.web.nhl.com/api/v1/standings').then(response => response.json());
+
+  console.log('data', standings);
+
+  return json({ ok: true, standings });
+};
+
 export default function Index() {
+  const data = useLoaderData();
+  console.log('data', data);
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="container bg-white mx-auto">
+      <h1 className="text-3xl font-bold">Stanley Cup Playoff Games {}</h1>
+      <div className="grid grid-cols-9 grid-rows-8 gap-5">
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+          <div>Team 1</div>
+      </div>
     </div>
   );
 }
