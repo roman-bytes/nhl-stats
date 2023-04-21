@@ -14,14 +14,14 @@ export const links = () => [
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-300">
+      <body className="bg-slate-300 h-full">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

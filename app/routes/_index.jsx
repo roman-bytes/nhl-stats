@@ -17,41 +17,12 @@ export const loader = async () => {
 export default function Index() {
   const data = useLoaderData();
   console.log('data', data);
+  const teams = Array(31).fill({});
   return (
-    <div className="container bg-white mx-auto">
+    <div className="container bg-white mx-auto h-full">
       <h1 className="text-3xl font-bold">Stanley Cup Playoff Games {}</h1>
-      <div className="grid grid-cols-9 grid-rows-8 gap-5">
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
-          <div>Team 1</div>
+      <div className="grid grid-cols-9 grid-rows-8 gap-5 h-full">
+          {teams.map((t, i) => <div key={i} className={`div${(i +1)}`}>Team {i + 1}</div>)}
       </div>
     </div>
   );
