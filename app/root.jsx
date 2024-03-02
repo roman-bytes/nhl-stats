@@ -8,9 +8,7 @@ import {
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 
-export const links = () => [
-  { rel: "stylesheet", href: stylesheet },
-];
+export const links = () => [{ rel: "stylesheet", href: stylesheet }];
 
 export default function App() {
   return (
@@ -21,7 +19,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-300 h-full">
+      <body className="bg-slate-600 h-full">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
