@@ -8,7 +8,24 @@ import {
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
 
-export const links = () => [{ rel: "stylesheet", href: stylesheet }];
+export const links = () => [
+  {
+    rel: "stylesheet",
+    href: stylesheet,
+  },
+  {
+    rel: "preconnect",
+    href: "https://fonts.googleapis.com",
+  },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap",
+  },
+];
 
 export default function App() {
   return (

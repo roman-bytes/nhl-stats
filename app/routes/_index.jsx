@@ -1,5 +1,8 @@
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Overlay } from "~/components/Overlay";
+import { GameBanner } from "~/components/GameBanner";
+import { RoundOne } from "~/components/RoundOne";
 
 const currentRound = {
   roundOne: true,
@@ -13,11 +16,15 @@ export const meta = () => {
 };
 
 export const loader = async () => {
-  const data = await fetch("https://api-web.nhle.com/v1/standings/now").then(
-    (response) => response.json()
-  );
+  const standingsData = await fetch(
+    "https://api-web.nhle.com/v1/standings/now"
+  ).then((response) => response.json());
+  const gamesData = await fetch(
+    "https://api-web.nhle.com/v1/scoreboard/now"
+  ).then((response) => response.json());
 
-  const { standings } = data;
+  const { standings } = standingsData;
+  console.log("GAMES", gamesData);
 
   // Splint into divisions
   const divisionalTeams = {
@@ -36,20 +43,93 @@ export const loader = async () => {
     ),
   };
 
+  const matchUps = {
+    western: [
+      [
+        ...divisionalTeams.atlantic.filter(
+          (team) => team.divisionSequence === 1
+        ),
+        ...divisionalTeams.atlantic.filter(
+          (team) => team.divisionSequence === 4
+        ),
+      ],
+      [
+        ...divisionalTeams.atlantic.filter(
+          (team) => team.divisionSequence === 2
+        ),
+        ...divisionalTeams.atlantic.filter(
+          (team) => team.divisionSequence === 3
+        ),
+      ],
+      [
+        ...divisionalTeams.pacific.filter(
+          (team) => team.divisionSequence === 1
+        ),
+        ...divisionalTeams.pacific.filter(
+          (team) => team.divisionSequence === 4
+        ),
+      ],
+      [
+        ...divisionalTeams.pacific.filter(
+          (team) => team.divisionSequence === 2
+        ),
+        ...divisionalTeams.pacific.filter(
+          (team) => team.divisionSequence === 3
+        ),
+      ],
+    ],
+    eastern: [
+      [
+        ...divisionalTeams.central.filter(
+          (team) => team.divisionSequence === 1
+        ),
+        ...divisionalTeams.central.filter(
+          (team) => team.divisionSequence === 4
+        ),
+      ],
+      [
+        ...divisionalTeams.central.filter(
+          (team) => team.divisionSequence === 2
+        ),
+        ...divisionalTeams.central.filter(
+          (team) => team.divisionSequence === 3
+        ),
+      ],
+      [
+        ...divisionalTeams.metropolitan.filter(
+          (team) => team.divisionSequence === 1
+        ),
+        ...divisionalTeams.metropolitan.filter(
+          (team) => team.divisionSequence === 4
+        ),
+      ],
+      [
+        ...divisionalTeams.metropolitan.filter(
+          (team) => team.divisionSequence === 2
+        ),
+        ...divisionalTeams.metropolitan.filter(
+          (team) => team.divisionSequence === 3
+        ),
+      ],
+    ],
+  };
+
   return json({
     ok: true,
-    teams: divisionalTeams,
+    matchUps: matchUps,
+    games: gamesData,
   });
 };
 
 export default function Index() {
   const data = useLoaderData();
   console.log("data", data);
-  const { teams } = data;
+  const { matchUps, games } = data;
   return (
-    <div className="container mx-auto h-full">
-      <h1 className="text-3xl font-bold">Stanley Cup Playoff Games {}</h1>
-      <div className="grid grid-cols-9 grid-rows-8 gap-5 h-full"></div>
-    </div>
+    <>
+      <GameBanner games={games} />
+      <RoundOne teams={matchUps} />
+      <Overlay />
+    </>
   );
 }
