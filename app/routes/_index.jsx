@@ -3,7 +3,9 @@ import { useLoaderData } from "@remix-run/react";
 import { Overlay } from "~/components/Overlay";
 import { GameBanner } from "~/components/GameBanner";
 import { RoundOne } from "~/components/RoundOne";
+import { RoundTwo } from "~/components/RoundTwo";
 
+// TODO use for keeping track of each round - automate if possible
 const currentRound = {
   roundOne: true,
   roundTwo: false,
@@ -16,15 +18,27 @@ export const meta = () => {
 };
 
 export const loader = async () => {
-  const standingsData = await fetch(
-    "https://api-web.nhle.com/v1/standings/now"
-  ).then((response) => response.json());
-  const gamesData = await fetch(
-    "https://api-web.nhle.com/v1/scoreboard/now"
-  ).then((response) => response.json());
+  const standingsData = await fetch("https://api-web.nhle.com/v1/standings/now")
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error("ERROR-standings: ", error);
+      return error;
+    });
+  const gamesData = await fetch("https://api-web.nhle.com/v1/scoreboard/now")
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error("ERROR-scoreboard: ", error);
+      return error;
+    });
+
+  if (standingsData.code || gamesData.code) {
+    return json({
+      ok: false,
+      error: standingsData,
+    });
+  }
 
   const { standings } = standingsData;
-  console.log("GAMES", gamesData);
 
   // Splint into divisions
   const divisionalTeams = {
@@ -125,11 +139,23 @@ export default function Index() {
   const data = useLoaderData();
   console.log("data", data);
   const { matchUps, games } = data;
+
+  if (!data.ok) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="bg-white rounded-md text-red-700 w-1/4 h-1/3 font-semibold font-sans justify-center flex items-center border shadow-black">
+          Whoops, something went wrong.
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <GameBanner games={games} />
       <RoundOne teams={matchUps} />
       <Overlay />
+      <RoundTwo />
     </>
   );
 }
