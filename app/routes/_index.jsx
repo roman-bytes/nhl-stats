@@ -4,6 +4,8 @@ import { Overlay } from "~/components/Overlay";
 import { GameBanner } from "~/components/GameBanner";
 import { RoundOne } from "~/components/RoundOne";
 import { RoundTwo } from "~/components/RoundTwo";
+import { ConferenceFinals } from "~/components/ConferenceFinals";
+import { StanleyCup } from "~/components/StanleyCup";
 
 // TODO use for keeping track of each round - automate if possible
 const currentRound = {
@@ -163,6 +165,8 @@ export default function Index() {
       </div>
       <Overlay />
       <RoundTwo />
+      <ConferenceFinals />
+      <StanleyCup />
     </>
   );
 }
