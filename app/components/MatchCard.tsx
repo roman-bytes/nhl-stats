@@ -35,16 +35,16 @@ export function MatchCard({ matchUp }) {
 
       {matchUp.map((team) => (
         <div
-          className="bg-white flex flex-row-reverse flex-nowrap flex-row p-2 mb-2"
-          key={team.teamName.default}
+          className="bg-white flex flex-row-reverse flex-nowrap p-2 mb-2"
+          key={team?.teamName?.default}
         >
-          <div className="text-slate-500">({team.divisionSequence})</div>
+          <div className="text-slate-500">({team?.divisionSequence})</div>
           <img
             className="w-8"
-            src={team.teamLogo}
-            alt={team.teamName.default}
+            src={team?.teamLogo}
+            alt={team?.teamName?.default}
           />
-          <div className="font-bold ml-auto">{team.teamAbbrev.default}</div>
+          <div className="font-bold ml-auto">{team?.teamAbbrev?.default}</div>
           <div className="self-end font-bold">0</div>
         </div>
       ))}

@@ -2,8 +2,8 @@ import { MatchCard } from "./MatchCard";
 
 export function RoundOne({ teams }) {
   return (
-    <div className="flex flex-row flex-nowrap h-full w-full mx-auto container pt-6">
-      <div className="w-1/2 flex flex-col">
+    <div className="flex flex-row flex-nowrap w-screen h-full pt-36 px-16">
+      <div className="w-1/2 flex flex-col justify-evenly">
         {teams.western.map((matchUps) => (
           <MatchCard
             key={matchUps[0].teamCommonName.default}
@@ -11,7 +11,7 @@ export function RoundOne({ teams }) {
           />
         ))}
       </div>
-      <div className="w-1/2 flex flex-col items-end">
+      <div className="w-1/2 flex flex-col items-end justify-evenly">
         {teams.eastern.map((matchUps) => (
           <MatchCard key={matchUps[0].teamCommonName} matchUp={matchUps} />
         ))}

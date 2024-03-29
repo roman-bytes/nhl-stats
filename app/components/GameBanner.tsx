@@ -17,7 +17,7 @@ export function GameBanner({ games }: GameBannerProps) {
   console.log("GAMES", todaysGames);
 
   return (
-    <div className="flex flex-col bg-white m-auto p-auto">
+    <div className="flex flex-col w-screen fixed top-0 overflow-hidden bg-white">
       <div className="flex overflow-x-scroll hide-scroll-bar">
         <div className="flex flex-nowrap">
           {todaysGames.map((gameDay) => (

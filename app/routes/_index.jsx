@@ -144,7 +144,7 @@ export default function Index() {
     return (
       <div className="flex justify-center items-center h-full">
         <div className="bg-white rounded-md text-red-700 w-1/4 h-1/3 font-semibold font-sans justify-center flex items-center border shadow-black">
-          Whoops, something went wrong.
+          Whoops, something went wrong. Check your network connection.
         </div>
       </div>
     );
