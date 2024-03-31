@@ -41,7 +41,7 @@ export function RoundTwo({ teams }) {
     ],
   };
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 pt-36 -z-20 flex flex-row flex-nowrap">
+    <div className="absolute top-0 left-0 right-0 bottom-0 pt-36 -z-30 flex flex-row flex-nowrap">
       <div className="flex flex-1 flex-col justify-center justify-evenly items-end">
         {tempTeams.western.map((matchUps) => (
           <MatchCard key={matchUps[0].team1} matchUp={matchUps} />

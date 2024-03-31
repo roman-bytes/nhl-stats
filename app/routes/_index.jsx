@@ -156,7 +156,7 @@ export default function Index() {
     <>
       <GameBanner games={games} />
       <RoundOne teams={matchUps} />
-      <div className="absolute top-0 left-0 right-0 bottom-0 pt-36 flex justify-center items-start">
+      <div className="-z-10 absolute top-0 left-0 right-0 bottom-0 pt-36 flex justify-center items-start">
         <img
           className="w-64"
           src="/2023-nhl-stanley-cup-playoffs.png"

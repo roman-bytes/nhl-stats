@@ -1,4 +1,4 @@
-export function MatchCard({ matchUp }) {
+export function MatchCard({ matchUp, coast }) {
   const playoffGames = [
     {
       winner: null,
@@ -35,7 +35,9 @@ export function MatchCard({ matchUp }) {
 
       {matchUp.map((team) => (
         <div
-          className="bg-white flex flex-row-reverse flex-nowrap p-2 mb-2"
+          className={`bg-white flex flex-nowrap p-2 mb-2 ${
+            coast === "eastern" && "flex-row-reverse"
+          }`}
           key={team?.teamName?.default}
         >
           <div className="text-slate-500">({team?.divisionSequence})</div>
@@ -44,7 +46,13 @@ export function MatchCard({ matchUp }) {
             src={team?.teamLogo}
             alt={team?.teamName?.default}
           />
-          <div className="font-bold ml-auto">{team?.teamAbbrev?.default}</div>
+          <div
+            className={`font-bold ${
+              coast === "eastern" ? "ml-auto" : "mr-auto"
+            }`}
+          >
+            {team?.teamAbbrev?.default}
+          </div>
           <div className="self-end font-bold">0</div>
         </div>
       ))}
