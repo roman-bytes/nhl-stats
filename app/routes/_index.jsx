@@ -159,7 +159,7 @@ export default function Index() {
       <div className="-z-10 absolute top-0 left-0 right-0 bottom-0 pt-36 flex justify-center items-start">
         <img
           className="w-64"
-          src="/2023-nhl-stanley-cup-playoffs.png"
+          src="/nhl-stanley-cup-playoffs.png"
           alt="Stanley Cup Playoffs"
         />
       </div>
