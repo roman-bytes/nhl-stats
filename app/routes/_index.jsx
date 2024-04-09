@@ -62,18 +62,18 @@ export const loader = async () => {
   const matchUps = {
     western: [
       [
-        ...divisionalTeams.atlantic.filter(
+        ...divisionalTeams.central.filter(
           (team) => team.divisionSequence === 1
         ),
-        ...divisionalTeams.atlantic.filter(
+        ...divisionalTeams.central.filter(
           (team) => team.divisionSequence === 4
         ),
       ],
       [
-        ...divisionalTeams.atlantic.filter(
+        ...divisionalTeams.central.filter(
           (team) => team.divisionSequence === 2
         ),
-        ...divisionalTeams.atlantic.filter(
+        ...divisionalTeams.central.filter(
           (team) => team.divisionSequence === 3
         ),
       ],
@@ -96,18 +96,18 @@ export const loader = async () => {
     ],
     eastern: [
       [
-        ...divisionalTeams.central.filter(
+        ...divisionalTeams.atlantic.filter(
           (team) => team.divisionSequence === 1
         ),
-        ...divisionalTeams.central.filter(
+        ...divisionalTeams.atlantic.filter(
           (team) => team.divisionSequence === 4
         ),
       ],
       [
-        ...divisionalTeams.central.filter(
+        ...divisionalTeams.atlantic.filter(
           (team) => team.divisionSequence === 2
         ),
-        ...divisionalTeams.central.filter(
+        ...divisionalTeams.atlantic.filter(
           (team) => team.divisionSequence === 3
         ),
       ],
