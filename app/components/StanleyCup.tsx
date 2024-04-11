@@ -15,7 +15,7 @@ export function StanleyCup({ teams }) {
     ],
   };
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 pt-36 -z-30 flex justify-center items-end">
+    <div className="hidden lg:absolute top-0 left-0 right-0 bottom-0 pt-36 -z-30 flex justify-center items-end">
       <div className="flex flex-col">
         {tempTeams.finals.map((matchUps) => (
           <MatchCard key={matchUps[0].team1} matchUp={matchUps} />

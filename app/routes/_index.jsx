@@ -155,14 +155,14 @@ export default function Index() {
   return (
     <>
       <GameBanner games={games} />
-      <RoundOne teams={matchUps} />
-      <div className="-z-10 absolute top-0 left-0 right-0 bottom-0 pt-36 flex justify-center items-start">
+      <div className="lg:-z-10 lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:bottom-0 pt-36 lg:pt-36 flex justify-center items-center lg:items-start">
         <img
           className="w-64"
           src="/nhl-stanley-cup-playoffs.png"
           alt="Stanley Cup Playoffs"
         />
       </div>
+      <RoundOne teams={matchUps} />
       <Overlay />
       <RoundTwo />
       <ConferenceFinals />
