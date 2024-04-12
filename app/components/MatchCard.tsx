@@ -25,7 +25,7 @@ export function MatchCard({ matchUp, coast }) {
 
   console.log("MATCHUP", matchUp);
   return (
-    <div className="bg-slate-200 p-4 my-2 w-96">
+    <div className="bg-slate-200 p-4 my-2 w-full sm:w-96">
       <div className="flex flex-row flex-nowrap items-center">
         Games:
         {playoffGames.map(() => (
