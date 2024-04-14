@@ -12,7 +12,7 @@ export function RoundOne({ teams }) {
           />
         ))}
       </div>
-      <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start lg:justify-evenly">
+      <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end lg:justify-evenly">
         {teams.eastern.map((matchUps) => (
           <MatchCard
             key={matchUps[0].teamCommonName}
