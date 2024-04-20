@@ -23,37 +23,39 @@ export function MatchCard({ matchUp, coast }) {
     },
   ];
 
-  console.log("MATCHUP", matchUp);
   return (
-    <div className="bg-slate-200 p-4 my-2 w-full sm:w-96">
-      <div className="flex flex-row flex-nowrap items-center">
-        Games:
-        {playoffGames.map(() => (
-          <div className="w-4 h-4 rounded-full bg-slate-400 border"></div>
-        ))}
-      </div>
-
-      {matchUp.map((team) => (
+    <div className="bg-slate-200 w-full sm:w-72 rounded-md border-4 border-white hover:bg-slate-300">
+      {matchUp.map((team: FullTeam) => (
         <div
-          className={`bg-white flex flex-nowrap p-2 mb-2 ${
+          className={`relative border border-white flex flex-nowrap p-2 ${
             coast === "eastern" && "flex-row-reverse"
           }`}
           key={team?.teamName?.default}
         >
-          <div className="text-slate-500">({team?.divisionSequence})</div>
-          <img
-            className="w-8"
-            src={team?.teamLogo}
-            alt={team?.teamName?.default}
-          />
           <div
-            className={`font-bold ${
-              coast === "eastern" ? "ml-auto" : "mr-auto"
+            className={`flex text-slate-500 border-2 border-white font-extrabold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
+              coast === "western" && "-left-4"
+            }`}
+          >
+            {team?.divisionSequence}
+          </div>
+          {team.teamLogo ? (
+            <img
+              className="w-20"
+              src={team?.teamLogo}
+              alt={team?.teamName?.default}
+            />
+          ) : (
+            <div className="w-20 h-20 bg-slate-800 rounded-md" />
+          )}
+          <div
+            className={`font-bold flex items-center text-xl ${
+              coast === "eastern" ? "ml-auto mr-4" : "mr-auto ml-4"
             }`}
           >
             {team?.teamAbbrev?.default}
           </div>
-          <div className="self-end font-bold">0</div>
+          <div className="font-bold flex items-center text-2xl p-4">0</div>
         </div>
       ))}
     </div>

@@ -20,12 +20,25 @@ export const meta = () => {
 };
 
 export const loader = async () => {
+  // Playoff API
+  const playoffs = await fetch(
+    "https://api-web.nhle.com/v1/playoff-bracket/2024"
+  )
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error("ERROR-playoff: ", error);
+      return error;
+    });
+
+  // Pulling from standings
   const standingsData = await fetch("https://api-web.nhle.com/v1/standings/now")
     .then((response) => response.json())
     .catch((error) => {
       console.error("ERROR-standings: ", error);
       return error;
     });
+
+  // Scoreboard specific API
   const gamesData = await fetch("https://api-web.nhle.com/v1/scoreboard/now")
     .then((response) => response.json())
     .catch((error) => {
@@ -129,6 +142,8 @@ export const loader = async () => {
       ],
     ],
   };
+
+  console.log("playoffs", playoffs);
 
   return json({
     ok: true,

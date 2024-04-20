@@ -73,7 +73,7 @@ export function GameBanner({ games }: GameBannerProps) {
                         alt={game.awayTeam.name.default}
                         className="w-8"
                       />
-                      <span className="pl-2 font-extrabold">
+                      <span className="pl-2 font-extrabold text-slate-700">
                         {game.awayTeam.abbrev}
                       </span>
                       <div className="flex-grow text-right font-extrabold">
@@ -86,7 +86,7 @@ export function GameBanner({ games }: GameBannerProps) {
                         alt={game.homeTeam.name.default}
                         className="w-8"
                       />
-                      <span className="pl-2 font-extrabold">
+                      <span className="pl-2 font-extrabold text-slate-700">
                         {game.homeTeam.abbrev}
                       </span>
                       <div className="flex-grow text-right font-extrabold">
