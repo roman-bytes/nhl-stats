@@ -24,7 +24,7 @@ export function MatchCard({ matchUp, coast }) {
   ];
 
   return (
-    <div className="bg-slate-200 w-full sm:w-72 rounded-md border-4 border-white hover:bg-slate-300">
+    <div className="bg-slate-200 w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300">
       {matchUp.map((team: FullTeam) => (
         <div
           className={`relative border border-white flex flex-nowrap p-2 ${
