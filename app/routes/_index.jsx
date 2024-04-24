@@ -149,13 +149,14 @@ export const loader = async () => {
     ok: true,
     matchUps: matchUps,
     games: gamesData,
+    playoffs,
   });
 };
 
 export default function Index() {
   const data = useLoaderData();
   console.log("data", data);
-  const { matchUps, games } = data;
+  const { matchUps, games, playoffs } = data;
 
   if (!data.ok) {
     return (
@@ -177,7 +178,9 @@ export default function Index() {
           alt="Stanley Cup Playoffs"
         />
       </div>
-      <RoundOne teams={matchUps} />
+      <RoundOne
+        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
+      />
       <Overlay />
       <RoundTwo />
       <ConferenceFinals />
