@@ -1,5 +1,7 @@
 export function MatchCard({ matchUp, coast }) {
-  console.log("matchUp", matchUp);
+  function replaceDarkWithLight(inputString) {
+    return inputString.replace(/dark/g, "light");
+  }
 
   return (
     <section className="bg-slate-200 w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300">
@@ -9,7 +11,7 @@ export function MatchCard({ matchUp, coast }) {
         }`}
       >
         <div
-          className={`flex text-slate-500 border-2 border-white font-thin absolute bg-slate-900 text-white w-10 h-10 rounded-full items-center justify-center -right-4 ${
+          className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
             coast === "west" && "-left-4"
           }`}
         >
@@ -18,7 +20,7 @@ export function MatchCard({ matchUp, coast }) {
         {matchUp?.topSeedTeam?.logo ? (
           <img
             className="w-20"
-            src={matchUp?.topSeedTeam?.logo}
+            src={replaceDarkWithLight(matchUp?.topSeedTeam?.logo)}
             alt={matchUp?.topSeedTeam?.name.default}
           />
         ) : (
@@ -42,7 +44,7 @@ export function MatchCard({ matchUp, coast }) {
         }`}
       >
         <div
-          className={`flex text-slate-500 border-2 border-white font-thin absolute bg-slate-900 text-white w-10 h-10 rounded-full items-center justify-center -right-4 ${
+          className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
             coast === "west" && "-left-4"
           }`}
         >
@@ -51,7 +53,7 @@ export function MatchCard({ matchUp, coast }) {
         {matchUp?.bottomSeedTeam?.logo ? (
           <img
             className="w-20"
-            src={matchUp?.bottomSeedTeam?.logo}
+            src={replaceDarkWithLight(matchUp?.bottomSeedTeam?.logo)}
             alt={matchUp?.bottomSeedTeam?.name?.default}
           />
         ) : (

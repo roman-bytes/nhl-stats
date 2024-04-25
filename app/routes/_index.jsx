@@ -173,8 +173,8 @@ export default function Index() {
       <GameBanner games={games} />
       <div className="lg:-z-10 lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:bottom-0 pt-36 lg:pt-36 flex justify-center items-center lg:items-start">
         <img
-          className="w-64"
-          src="/nhl-stanley-cup-playoffs.png"
+          className="container px-6 lg:px-96"
+          src={playoffs.bracketLogo}
           alt="Stanley Cup Playoffs"
         />
       </div>
