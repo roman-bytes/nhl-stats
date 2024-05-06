@@ -87,13 +87,14 @@ export default function Index() {
           alt="Stanley Cup Playoffs"
         />
       </div>
-      <RoundOne
-        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
-      />
-      <Overlay />
       <RoundTwo
         teams={playoffs.series.filter((matchup) => matchup.playoffRound === 2)}
       />
+      <Overlay />
+      <RoundOne
+        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
+      />
+
       <ConferenceFinals />
       <StanleyCup />
     </>

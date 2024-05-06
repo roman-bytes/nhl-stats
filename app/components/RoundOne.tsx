@@ -39,9 +39,8 @@ function checkWestCoast(series) {
 }
 
 export function RoundOne(teams) {
-  console.log("TEAMS", teams);
   return (
-    <div className="flex flex-col md:flex-row md:flex-nowrap w-screen h-full pt-4 px-10 lg:pt-36 lg:px-16 -z-10">
+    <div className="hidden absolute lg:flex lg:top-0 lg:bottom-0 lg:left-0 lg:right-0 md:flex-row md:flex-nowrap pt-4 px-10 lg:pt-36 lg:px-16 -z-50">
       <div className="w-full md:w-1/2 flex flex-col items-center md:items-start md:justify-evenly">
         {teams.teams.map(
           (matchUp) =>

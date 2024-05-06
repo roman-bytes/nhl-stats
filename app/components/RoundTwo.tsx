@@ -26,7 +26,7 @@ export function RoundTwo({ teams }) {
     }
   }
   return (
-    <div className="hidden lg:absolute top-0 left-0 right-0 bottom-0 pt-36 -z-30 lg:flex flex-row flex-nowrap">
+    <div className="pt-36 px-28 -z-10 flex container mx-auto flex-col md:flex-row md:flex-nowrap w-screen h-full">
       <div className="flex flex-1 flex-col justify-center justify-evenly items-end">
         {teams.map(
           (matchUp) =>
@@ -41,7 +41,7 @@ export function RoundTwo({ teams }) {
       </div>
       <div className="w-1/3" />
 
-      <div className="flex flex-1 flex-col justify-center justify-evenly">
+      <div className="w-full md:w-1/2 flex flex-col items-center md:items-end md:justify-evenly">
         {teams.map(
           (matchUp) =>
             checkEastCoast(matchUp.seriesLetter) && (
