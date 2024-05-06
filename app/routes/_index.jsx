@@ -53,101 +53,10 @@ export const loader = async () => {
     });
   }
 
-  const { standings } = standingsData;
-
-  // Splint into divisions
-  const divisionalTeams = {
-    metropolitan: standings.filter(
-      (team) =>
-        team.divisionName === "Metropolitan" && team.divisionSequence <= 4
-    ),
-    atlantic: standings.filter(
-      (team) => team.divisionName === "Atlantic" && team.divisionSequence <= 4
-    ),
-    pacific: standings.filter(
-      (team) => team.divisionName === "Pacific" && team.divisionSequence <= 4
-    ),
-    central: standings.filter(
-      (team) => team.divisionName === "Central" && team.divisionSequence <= 4
-    ),
-  };
-
-  const matchUps = {
-    western: [
-      [
-        ...divisionalTeams.central.filter(
-          (team) => team.divisionSequence === 1
-        ),
-        ...divisionalTeams.central.filter(
-          (team) => team.divisionSequence === 4
-        ),
-      ],
-      [
-        ...divisionalTeams.central.filter(
-          (team) => team.divisionSequence === 2
-        ),
-        ...divisionalTeams.central.filter(
-          (team) => team.divisionSequence === 3
-        ),
-      ],
-      [
-        ...divisionalTeams.pacific.filter(
-          (team) => team.divisionSequence === 1
-        ),
-        ...divisionalTeams.pacific.filter(
-          (team) => team.divisionSequence === 4
-        ),
-      ],
-      [
-        ...divisionalTeams.pacific.filter(
-          (team) => team.divisionSequence === 2
-        ),
-        ...divisionalTeams.pacific.filter(
-          (team) => team.divisionSequence === 3
-        ),
-      ],
-    ],
-    eastern: [
-      [
-        ...divisionalTeams.atlantic.filter(
-          (team) => team.divisionSequence === 1
-        ),
-        ...divisionalTeams.atlantic.filter(
-          (team) => team.divisionSequence === 4
-        ),
-      ],
-      [
-        ...divisionalTeams.atlantic.filter(
-          (team) => team.divisionSequence === 2
-        ),
-        ...divisionalTeams.atlantic.filter(
-          (team) => team.divisionSequence === 3
-        ),
-      ],
-      [
-        ...divisionalTeams.metropolitan.filter(
-          (team) => team.divisionSequence === 1
-        ),
-        ...divisionalTeams.metropolitan.filter(
-          (team) => team.divisionSequence === 4
-        ),
-      ],
-      [
-        ...divisionalTeams.metropolitan.filter(
-          (team) => team.divisionSequence === 2
-        ),
-        ...divisionalTeams.metropolitan.filter(
-          (team) => team.divisionSequence === 3
-        ),
-      ],
-    ],
-  };
-
   console.log("playoffs", playoffs);
 
   return json({
     ok: true,
-    matchUps: matchUps,
     games: gamesData,
     playoffs,
   });
@@ -156,7 +65,7 @@ export const loader = async () => {
 export default function Index() {
   const data = useLoaderData();
   console.log("data", data);
-  const { matchUps, games, playoffs } = data;
+  const { games, playoffs } = data;
 
   if (!data.ok) {
     return (
@@ -182,7 +91,9 @@ export default function Index() {
         teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
       />
       <Overlay />
-      <RoundTwo />
+      <RoundTwo
+        teams={playoffs.series.filter((matchup) => matchup.playoffRound === 2)}
+      />
       <ConferenceFinals />
       <StanleyCup />
     </>
