@@ -94,7 +94,6 @@ export default function Index() {
       <RoundOne
         teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
       />
-
       <ConferenceFinals />
       <StanleyCup />
     </>
