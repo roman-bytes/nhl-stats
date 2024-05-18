@@ -3,7 +3,7 @@ import { MatchCard } from "./MatchCard";
 export function ConferenceFinals({ teams }) {
   function checkEastCoast(series) {
     switch (series) {
-      case "N":
+      case "M":
         return true;
       default:
         return false;
@@ -12,7 +12,7 @@ export function ConferenceFinals({ teams }) {
 
   function checkWestCoast(series) {
     switch (series) {
-      case "M":
+      case "N":
         return true;
       default:
         return false;
