@@ -7,14 +7,6 @@ import { RoundTwo } from "~/components/RoundTwo";
 import { ConferenceFinals } from "~/components/ConferenceFinals";
 import { StanleyCup } from "~/components/StanleyCup";
 
-// TODO use for keeping track of each round - automate if possible
-const currentRound = {
-  roundOne: true,
-  roundTwo: false,
-  semiFinals: false,
-  finals: false,
-};
-
 export const meta = () => {
   return [{ title: "Stanley Cup Playoff Bracket" }];
 };
@@ -52,8 +44,6 @@ export const loader = async () => {
       error: standingsData,
     });
   }
-
-  console.log("playoffs", playoffs);
 
   return json({
     ok: true,
@@ -94,7 +84,9 @@ export default function Index() {
       <RoundOne
         teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
       />
-      <ConferenceFinals />
+      <ConferenceFinals
+        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 3)}
+      />
       <StanleyCup />
     </>
   );
