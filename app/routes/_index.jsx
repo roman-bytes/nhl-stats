@@ -38,10 +38,10 @@ export const loader = async () => {
       return error;
     });
 
-  if (standingsData.code || gamesData.code) {
+  if (standingsData.code || gamesData.code || playoffs.code) {
     return json({
       ok: false,
-      error: standingsData,
+      error: "RUH-ROO",
     });
   }
 

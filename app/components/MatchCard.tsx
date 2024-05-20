@@ -1,10 +1,28 @@
-export function MatchCard({ matchUp, coast }) {
+import { useEffect } from "react";
+
+export function MatchCard({ matchUp, coast, isActive, onToggle }) {
   function replaceDarkWithLight(inputString) {
     return inputString.replace(/dark/g, "light");
   }
 
+  useEffect(() => {
+    if (isActive) {
+      const matchUpDetailsTopTeam = fetch(
+        `https://api-web.nhle.com/v1/schedule/playoff-series/20232024/${matchUp.seriesLetter}`
+      )
+        .then((res) => res.json())
+        .catch((error) => {
+          console.error("ERROR-detail: ", error);
+          return error;
+        });
+    }
+  }, []);
+
   return (
-    <section className="bg-slate-200 w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300">
+    <section
+      onClick={onToggle}
+      className="bg-slate-200 hover:cursor-pointer w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300"
+    >
       <div
         className={`relative border border-white flex flex-nowrap p-2 ${
           coast === "east" && "flex-row-reverse"
@@ -38,6 +56,7 @@ export function MatchCard({ matchUp, coast }) {
           {matchUp?.topSeedWins}
         </div>
       </div>
+      {isActive && <div className="h-64" />}
       <div
         className={`relative border border-white flex flex-nowrap p-2 ${
           coast === "east" && "flex-row-reverse"

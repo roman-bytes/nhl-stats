@@ -1,6 +1,12 @@
+import { useMachine } from "@xstate/react";
+import toggleCardMachine from "~/machines/toggleCardMachine";
 import { MatchCard } from "./MatchCard";
 
 export function RoundTwo({ teams }) {
+  const [state, send] = useMachine(toggleCardMachine);
+
+  console.log("state", state);
+
   function checkEastCoast(series) {
     switch (series) {
       case "I":
@@ -35,6 +41,10 @@ export function RoundTwo({ teams }) {
                 key={matchUp.seriesLetter}
                 coast="west"
                 matchUp={matchUp}
+                isActive={state.context.activeCardId === matchUp.seriesLetter}
+                onToggle={() =>
+                  send({ type: "TOGGLE_CARD", cardId: matchUp.seriesLetter })
+                }
               />
             )
         )}
@@ -49,6 +59,10 @@ export function RoundTwo({ teams }) {
                 key={matchUp.seriesLetter}
                 coast="east"
                 matchUp={matchUp}
+                isActive={state.context.activeCardId === matchUp.seriesLetter}
+                onToggle={() =>
+                  send({ type: "TOGGLE_CARD", cardId: matchUp.seriesLetter })
+                }
               />
             )
         )}
