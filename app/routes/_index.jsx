@@ -1,17 +1,27 @@
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import { useLoaderData, Form } from "@remix-run/react";
 import { Overlay } from "~/components/Overlay";
 import { GameBanner } from "~/components/GameBanner";
 import { RoundOne } from "~/components/RoundOne";
 import { RoundTwo } from "~/components/RoundTwo";
 import { ConferenceFinals } from "~/components/ConferenceFinals";
 import { StanleyCup } from "~/components/StanleyCup";
+import { log } from "xstate";
 
 export const meta = () => {
   return [{ title: "Stanley Cup Playoff Bracket" }];
 };
 
+export const action = async (args) => {
+  const formData = await args.request.clone().formData();
+
+  console.log("FORM DATA", formData);
+
+  return redirect("/");
+};
+
 export const loader = async () => {
+  console.log("LOADER HAS LOADED");
   // Playoff API
   const playoffs = await fetch(
     "https://api-web.nhle.com/v1/playoff-bracket/2024"
@@ -19,7 +29,10 @@ export const loader = async () => {
     .then((response) => response.json())
     .catch((error) => {
       console.error("ERROR-playoff: ", error);
-      return error;
+      return {
+        ...error,
+        code: "FAILED",
+      };
     });
 
   // Pulling from standings
@@ -27,7 +40,10 @@ export const loader = async () => {
     .then((response) => response.json())
     .catch((error) => {
       console.error("ERROR-standings: ", error);
-      return error;
+      return {
+        ...error,
+        code: "FAILED",
+      };
     });
 
   // Scoreboard specific API
@@ -35,21 +51,33 @@ export const loader = async () => {
     .then((response) => response.json())
     .catch((error) => {
       console.error("ERROR-scoreboard: ", error);
-      return error;
+      return {
+        ...error,
+        code: "FAILED",
+      };
     });
 
-  if (standingsData.code || gamesData.code) {
+  console.log("playoffs error", playoffs);
+
+  if (standingsData.code || gamesData.code || playoffs.code) {
     return json({
       ok: false,
-      error: standingsData,
+      error: "RUH-ROO",
     });
   }
 
-  return json({
-    ok: true,
-    games: gamesData,
-    playoffs,
-  });
+  return json(
+    {
+      ok: true,
+      games: gamesData,
+      playoffs,
+    },
+    {
+      headers: {
+        "Cache-Control": "max-age=3600, public",
+      },
+    }
+  );
 };
 
 export default function Index() {
@@ -68,7 +96,7 @@ export default function Index() {
   }
 
   return (
-    <>
+    <Form reloadDocument method="post" className="w-screen h-full">
       <GameBanner games={games} />
       <div className="lg:-z-10 lg:absolute lg:top-0 lg:left-0 lg:right-0 lg:bottom-0 pt-36 lg:pt-36 flex justify-center items-center lg:items-start">
         <img
@@ -88,6 +116,6 @@ export default function Index() {
         teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 3)}
       />
       <StanleyCup />
-    </>
+    </Form>
   );
 }
