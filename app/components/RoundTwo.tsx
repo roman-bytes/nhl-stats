@@ -5,8 +5,6 @@ import { MatchCard } from "./MatchCard";
 export function RoundTwo({ teams }) {
   const [state, send] = useMachine(toggleCardMachine);
 
-  console.log("state", state);
-
   function checkEastCoast(series) {
     switch (series) {
       case "I":

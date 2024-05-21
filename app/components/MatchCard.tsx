@@ -1,95 +1,82 @@
-import { useEffect } from "react";
-
 export function MatchCard({ matchUp, coast, isActive, onToggle }) {
   function replaceDarkWithLight(inputString) {
     return inputString.replace(/dark/g, "light");
   }
 
-  useEffect(() => {
-    if (isActive) {
-      const matchUpDetailsTopTeam = fetch(
-        `https://api-web.nhle.com/v1/schedule/playoff-series/20232024/${matchUp.seriesLetter}`
-      )
-        .then((res) => res.json())
-        .catch((error) => {
-          console.error("ERROR-detail: ", error);
-          return error;
-        });
-    }
-  }, []);
-
   return (
-    <section
-      onClick={onToggle}
-      className="bg-slate-200 hover:cursor-pointer w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300"
-    >
-      <div
-        className={`relative border border-white flex flex-nowrap p-2 ${
-          coast === "east" && "flex-row-reverse"
-        }`}
+    <button type="submit" name="_action" value={matchUp.seriesLetter}>
+      <section
+        onClick={onToggle}
+        className="bg-slate-200 hover:cursor-pointer w-full sm:w-72 rounded-md border-4 mb-6 border-white hover:bg-slate-300"
       >
         <div
-          className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
-            coast === "west" && "-left-4"
+          className={`relative border border-white flex flex-nowrap p-2 ${
+            coast === "east" && "flex-row-reverse"
           }`}
         >
-          {matchUp?.topSeedRankAbbrev}
-        </div>
-        {matchUp?.topSeedTeam?.logo ? (
-          <img
-            className="w-20"
-            src={replaceDarkWithLight(matchUp?.topSeedTeam?.logo)}
-            alt={matchUp?.topSeedTeam?.name.default}
-          />
-        ) : (
-          <div className="w-20 h-20 bg-slate-800 rounded-md" />
-        )}
+          <div
+            className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
+              coast === "west" && "-left-4"
+            }`}
+          >
+            {matchUp?.topSeedRankAbbrev}
+          </div>
+          {matchUp?.topSeedTeam?.logo ? (
+            <img
+              className="w-20"
+              src={replaceDarkWithLight(matchUp?.topSeedTeam?.logo)}
+              alt={matchUp?.topSeedTeam?.name.default}
+            />
+          ) : (
+            <div className="w-20 h-20 bg-slate-800 rounded-md" />
+          )}
 
+          <div
+            className={`font-bold flex items-center text-xl ${
+              coast === "east" ? "ml-auto mr-4" : "mr-auto ml-4"
+            }`}
+          >
+            {matchUp?.topSeedTeam?.abbrev}
+          </div>
+          <div className="font-bold flex items-center text-2xl p-4">
+            {matchUp?.topSeedWins}
+          </div>
+        </div>
+        {isActive && <div className="h-64" />}
         <div
-          className={`font-bold flex items-center text-xl ${
-            coast === "east" ? "ml-auto mr-4" : "mr-auto ml-4"
+          className={`relative border border-white flex flex-nowrap p-2 ${
+            coast === "east" && "flex-row-reverse"
           }`}
         >
-          {matchUp?.topSeedTeam?.abbrev}
-        </div>
-        <div className="font-bold flex items-center text-2xl p-4">
-          {matchUp?.topSeedWins}
-        </div>
-      </div>
-      {isActive && <div className="h-64" />}
-      <div
-        className={`relative border border-white flex flex-nowrap p-2 ${
-          coast === "east" && "flex-row-reverse"
-        }`}
-      >
-        <div
-          className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
-            coast === "west" && "-left-4"
-          }`}
-        >
-          {matchUp?.bottomSeedRankAbbrev}
-        </div>
-        {matchUp?.bottomSeedTeam?.logo ? (
-          <img
-            className="w-20"
-            src={replaceDarkWithLight(matchUp?.bottomSeedTeam?.logo)}
-            alt={matchUp?.bottomSeedTeam?.name?.default}
-          />
-        ) : (
-          <div className="w-20 h-20 bg-slate-800 rounded-md" />
-        )}
+          <div
+            className={`flex text-xs text-slate-500 border-2 border-white font-semibold absolute bg-slate-900 text-white w-8 h-8 rounded-full items-center justify-center -right-4 ${
+              coast === "west" && "-left-4"
+            }`}
+          >
+            {matchUp?.bottomSeedRankAbbrev}
+          </div>
+          {matchUp?.bottomSeedTeam?.logo ? (
+            <img
+              className="w-20"
+              src={replaceDarkWithLight(matchUp?.bottomSeedTeam?.logo)}
+              alt={matchUp?.bottomSeedTeam?.name?.default}
+            />
+          ) : (
+            <div className="w-20 h-20 bg-slate-800 rounded-md" />
+          )}
 
-        <div
-          className={`font-bold flex items-center text-xl ${
-            coast === "east" ? "ml-auto mr-4" : "mr-auto ml-4"
-          }`}
-        >
-          {matchUp?.bottomSeedTeam?.abbrev}
+          <div
+            className={`font-bold flex items-center text-xl ${
+              coast === "east" ? "ml-auto mr-4" : "mr-auto ml-4"
+            }`}
+          >
+            {matchUp?.bottomSeedTeam?.abbrev}
+          </div>
+          <div className="font-bold flex items-center text-2xl p-4">
+            {matchUp?.bottomSeedWins}
+          </div>
         </div>
-        <div className="font-bold flex items-center text-2xl p-4">
-          {matchUp?.bottomSeedWins}
-        </div>
-      </div>
-    </section>
+      </section>
+    </button>
   );
 }
