@@ -1,6 +1,10 @@
+import { useMachine } from "@xstate/react";
+import toggleCardMachine from "~/machines/toggleCardMachine";
 import { MatchCard } from "./MatchCard";
 
 export function ConferenceFinals({ teams }) {
+  const [state, send] = useMachine(toggleCardMachine);
+
   function checkEastCoast(series) {
     switch (series) {
       case "M":
@@ -20,7 +24,7 @@ export function ConferenceFinals({ teams }) {
   }
 
   return (
-    <div className="hidden lg:absolute top-0 left-0 right-0 bottom-0 pt-36 -z-30 lg:flex flex-row flex-nowrap">
+    <div className="container mx-auto pt-36 -z-10 w-screen h-full lg:flex flex-row flex-nowrap">
       <div className="flex flex-1 flex-col justify-center justify-evenly items-end">
         {teams.map(
           (matchUp) =>
@@ -29,6 +33,10 @@ export function ConferenceFinals({ teams }) {
                 key={matchUp.seriesLetter}
                 coast="west"
                 matchUp={matchUp}
+                isActive={state.context.activeCardId === matchUp.seriesLetter}
+                onToggle={() =>
+                  send({ type: "TOGGLE_CARD", cardId: matchUp.seriesLetter })
+                }
               />
             )
         )}
@@ -42,6 +50,10 @@ export function ConferenceFinals({ teams }) {
                 key={matchUp.seriesLetter}
                 coast="east"
                 matchUp={matchUp}
+                isActive={state.context.activeCardId === matchUp.seriesLetter}
+                onToggle={() =>
+                  send({ type: "TOGGLE_CARD", cardId: matchUp.seriesLetter })
+                }
               />
             )
         )}

@@ -30,7 +30,7 @@ export function RoundTwo({ teams }) {
     }
   }
   return (
-    <div className="pt-36 px-28 -z-10 flex container mx-auto flex-col md:flex-row md:flex-nowrap w-screen h-full">
+    <div className="hidden absolute top-0 left-0 right-0 bottom-0 pt-36 px-28 -z-30 lg:flex container mx-auto flex-col md:flex-row md:flex-nowrap w-screen h-full">
       <div className="flex flex-1 flex-col justify-center justify-evenly items-end">
         {teams.map(
           (matchUp) =>
