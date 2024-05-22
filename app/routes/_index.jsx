@@ -6,6 +6,7 @@ import { RoundOne } from "~/components/RoundOne";
 import { RoundTwo } from "~/components/RoundTwo";
 import { ConferenceFinals } from "~/components/ConferenceFinals";
 import { StanleyCup } from "~/components/StanleyCup";
+import { log } from "xstate";
 
 export const meta = () => {
   return [{ title: "Stanley Cup Playoff Bracket" }];
