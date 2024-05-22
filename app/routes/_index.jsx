@@ -57,8 +57,6 @@ export const loader = async () => {
       };
     });
 
-  console.log("playoffs error", playoffs);
-
   if (standingsData.code || gamesData.code || playoffs.code) {
     return json({
       ok: false,
@@ -105,16 +103,18 @@ export default function Index() {
           alt="Stanley Cup Playoffs"
         />
       </div>
-      <RoundTwo
-        teams={playoffs.series.filter((matchup) => matchup.playoffRound === 2)}
-      />
-      <Overlay />
-      <RoundOne
-        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
-      />
       <ConferenceFinals
         teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 3)}
       />
+      <Overlay />
+      <RoundTwo
+        teams={playoffs.series.filter((matchup) => matchup.playoffRound === 2)}
+      />
+
+      <RoundOne
+        teams={playoffs.series.filter((matchUp) => matchUp.playoffRound === 1)}
+      />
+
       <StanleyCup />
     </Form>
   );
